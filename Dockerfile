@@ -9,5 +9,17 @@ RUN npm run build
 # ---- Serve Stage ----
 FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
+
+# Configure nginx to handle React routing
+COPY <<EOF /etc/nginx/conf.d/default.conf
+server {
+    listen 3000;
+    location / {
+        root /usr/share/nginx/html;
+        try_files $uri $uri/ /index.html;
+    }
+}
+EOF
+
 EXPOSE 3000
-CMD ["nginx", "-g", "daemon off;"] 
+CMD ["nginx", "-g", "daemon off;"]
