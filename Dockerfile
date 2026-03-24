@@ -10,13 +10,22 @@ RUN npm run build
 FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Configure nginx to handle React routing
+# Create proper nginx config without redirect loop
+RUN rm /etc/nginx/conf.d/default.conf
 COPY <<EOF /etc/nginx/conf.d/default.conf
 server {
     listen 3000;
+    
     location / {
         root /usr/share/nginx/html;
-        try_files $uri $uri/ /index.html;
+        try_files \$uri \$uri/ /index.html;
+        add_header Cache-Control "public, max-age=0";
+    }
+    
+    location /static {
+        root /usr/share/nginx/html;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
     }
 }
 EOF
