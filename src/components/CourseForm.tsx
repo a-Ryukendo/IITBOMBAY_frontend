@@ -201,11 +201,11 @@ const CourseForm: React.FC<CourseFormProps> = ({ onSubmit, onCancel, isLoading =
               onChange={handleInputChange}
             >
               <option value="">Select Type</option>
-              <option value="Core">Core</option>
-              <option value="Elective">Elective</option>
-              <option value="Lab">Lab</option>
-              <option value="Project">Project</option>
-              <option value="Seminar">Seminar</option>
+              <option value="CORE">Core</option>
+              <option value="ELECTIVE">Elective</option>
+              <option value="LAB">Lab</option>
+              <option value="PROJECT">Project</option>
+              <option value="SEMINAR">Seminar</option>
             </select>
           </div>
 
