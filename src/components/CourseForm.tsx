@@ -19,7 +19,7 @@ const CourseForm: React.FC<CourseFormProps> = ({ onSubmit, onCancel, isLoading =
     semester: 1,
     description: '',
     maxStudents: undefined,
-    courseType: 'CORE',
+    courseType: '',
     prerequisiteIds: [],
   });
 
